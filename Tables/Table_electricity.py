@@ -1,4 +1,4 @@
-from database import DatabaseContextManager
+from Tables.DatabaseContextManager import DatabaseContextManager
 
 
 def create_table_electricity():

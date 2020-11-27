@@ -1,4 +1,4 @@
-from database import DatabaseContextManager
+from Tables.DatabaseContextManager import DatabaseContextManager
 
 
 def create_table_television():
@@ -14,7 +14,7 @@ def create_table_television():
 
 
 def create_television(display_diagonal: int, display_technology: str, resolution: str, hd_type: str):
-    query = """INSERT INTO Payer_profile(display_diagonal, display_technology,
+    query = """INSERT INTO Television(display_diagonal, display_technology,
                 resolution, HD_type) VALUES(?,?,?,?)"""
     parameters = [display_diagonal, display_technology, resolution, hd_type]
     with DatabaseContextManager("db") as db:

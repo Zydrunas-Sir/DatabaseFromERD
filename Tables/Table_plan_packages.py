@@ -1,15 +1,15 @@
-from database import DatabaseContextManager
+from Tables.DatabaseContextManager import DatabaseContextManager
 
 
 def create_table_plan_packages():
     query = """CREATE TABLE IF NOT EXISTS Plan_packages(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         television_id INTEGER,
-        FOREIGN KEY (television_id) REFERENCES Television(id),
         plan_id INTEGER,
-        FOREIGN KEY (plan_id) REFERENCES Plan(id),
         price FLOAT,
-        date_of_purchase DATE
+        date_of_purchase DATE,
+        FOREIGN KEY (television_id) REFERENCES Television(id),
+        FOREIGN KEY (plan_id) REFERENCES Plan(id)
         )"""
     with DatabaseContextManager("db") as db:
         db.execute(query)

@@ -1,4 +1,4 @@
-from database import DatabaseContextManager
+from Tables.DatabaseContextManager import DatabaseContextManager
 
 
 def create_table_payer():
@@ -6,14 +6,14 @@ def create_table_payer():
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         identification_number TEXT,
         payer_profile_id INTEGER,
-        FOREIGN KEY (payer_profile_id) REFERENCES Payer_profile(id),
         internet_id INTEGER,
-        FOREIGN KEY (internet_id) REFERENCES Internet(id),
         electricity_id INTEGER,
-        FOREIGN KEY (electricity_id) REFERENCES Electricity(id),
         heating_id INTEGER,
-        FOREIGN KEY (heating_id) REFERENCES Heating(id),
         plan_packages_id INTEGER,
+        FOREIGN KEY (payer_profile_id) REFERENCES Payer_profile(id),
+        FOREIGN KEY (internet_id) REFERENCES Internet(id),
+        FOREIGN KEY (electricity_id) REFERENCES Electricity(id),
+        FOREIGN KEY (heating_id) REFERENCES Heating(id),
         FOREIGN KEY (plan_packages_id) REFERENCES Plan_packages(id)
         )"""
     with DatabaseContextManager("db") as db:

@@ -1,16 +1,8 @@
-import sqlite3
-
-
-class DatabaseContextManager(object):
-
-    def __init__(self, path):
-        self.path = path
-
-    def __enter__(self):
-        self.connection = sqlite3.connect(self.path)
-        self.cursor = self.connection.cursor()
-        return self.cursor
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        self.connection.commit()
-        self.connection.close()
+from Tables.Table_electricity import *
+from Tables.Table_heating import *
+from Tables.Table_internet import *
+from Tables.Table_payer import *
+from Tables.Table_payer_profile import *
+from Tables.Table_plan import *
+from Tables.Table_plan_packages import *
+from Tables.Table_television import *
