@@ -22,7 +22,7 @@ def create_table_payer():
 
 def create_payer(identification_number: int, payer_profile: int, internet_id: int, electricity_id: int,
                  heating_id: int, plan_packages_id: int):
-    query = """INSERT INTO Payer(identification_number, payer_profile, internet_id, electricity_id, heating_id,
+    query = """INSERT INTO Payer(identification_number, payer_profile_id, internet_id, electricity_id, heating_id,
     plan_packages_id) VALUES(?,?,?,?,?,?)"""
     parameters = [identification_number, payer_profile, internet_id, electricity_id, heating_id,
                   plan_packages_id]
@@ -53,3 +53,19 @@ def delete_payer(identification_number: str):
     parameters = [identification_number]
     with DatabaseContextManager("db") as db:
         db.execute(query, parameters)
+
+
+def get_all_tables():
+    query = """SELECT * FROM Payer
+                JOIN Electricity
+                    ON Payer.electricity_id = Electricity.id
+                JOIN Heating
+                    ON Payer.heating_id = Heating.id
+                Join Internet
+                    ON Payer.internet_id = Internet.id
+                Join Payer_profile
+                    ON Payer.payer_profile_id = Payer_profile.id"""
+    with DatabaseContextManager("db") as db:
+        db.execute(query)
+        for row in db.fetchall():
+            print(row)

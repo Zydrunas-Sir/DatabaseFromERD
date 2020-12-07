@@ -15,8 +15,8 @@ def create_table_plan_packages():
         db.execute(query)
 
 
-def create_plan_packages(television_id: int, plan_id: int, price: float, date_of_purchase: dict):
-    query = """INSERT INTO Plan_packages(channel_type, channel_list, exclusives) VALUES(?,?,?,?)"""
+def create_plan_packages(television_id: int, plan_id: int, price: float, date_of_purchase: str):
+    query = """INSERT INTO Plan_packages(television_id, plan_id, price, date_of_purchase) VALUES(?,?,?,?)"""
     parameters = [television_id, plan_id, price, date_of_purchase]
     with DatabaseContextManager("db") as db:
         db.execute(query, parameters)
