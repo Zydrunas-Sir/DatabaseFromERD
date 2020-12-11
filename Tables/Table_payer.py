@@ -38,11 +38,11 @@ def get_payer():
             print(record)
 
 
-def update_payer_identification_number(old_identification_number: int, new_identification_number: int):
+def update_payer_identification_number(identification_number: int, electricity_id: int, id: int):
     query = """UPDATE Payer
-                SET identification_number = ?
-                WHERE identification_number = ?"""
-    parameters = [new_identification_number, old_identification_number]
+                SET identification_number = ?, electricity_id = ?
+                WHERE id = ?"""
+    parameters = [identification_number, electricity_id, id]
     with DatabaseContextManager("db") as db:
         db.execute(query, parameters)
 
@@ -56,7 +56,7 @@ def delete_payer(identification_number: str):
 
 
 def get_all_tables():
-    query = """SELECT * FROM Payer
+    query = """SELECT name, Electricity.bill FROM Payer
                 JOIN Electricity
                     ON Payer.electricity_id = Electricity.id
                 JOIN Heating
